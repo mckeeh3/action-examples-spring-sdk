@@ -1,0 +1,10 @@
+@urlPrefix = http://localhost:9000
+@getMsg = hello world!
+
+### Simple action that echos request string
+
+GET {{urlPrefix}}/http-echo/{{getMsg}}
+
+### returs an error response
+
+GET {{urlPrefix}}/http-echo/error

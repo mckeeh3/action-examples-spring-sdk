@@ -1,0 +1,25 @@
+@urlPrefix = http://localhost:9000
+@productId = product-1
+@name = Product 1
+@description = Product 1 description
+@price = 10.0
+
+### Create a product
+
+POST {{urlPrefix}}/product/{{productId}}/create
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "name": "{{name}}",
+  "description": "{{description}}",
+  "price": {{price}}
+}
+
+### Get a product
+
+GET {{urlPrefix}}/product/{{productId}}
+
+### query products by product id
+
+GET {{urlPrefix}}/products/by-product-id/{{productId}}

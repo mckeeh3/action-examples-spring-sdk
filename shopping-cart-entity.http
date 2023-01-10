@@ -1,0 +1,21 @@
+@urlPrefix = http://localhost:9000
+@cartId = 123
+@productId = butter
+@quantity = 5
+
+### add item to shopping cart
+
+PUT {{urlPrefix}}/shopping-cart/{{cartId}}/add-item
+Content-Type: application/json
+
+{
+  "cartId": "{{cartId}}",
+  "item": {
+    "productId": "{{productId}}",
+    "quantity": {{quantity}}
+  }
+}
+
+### get shopping cart
+
+GET {{urlPrefix}}/shopping-cart/{{cartId}}
