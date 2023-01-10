@@ -20,6 +20,7 @@ public class ProductsByProductIdView extends View<ProductsByProductIdView.Produc
   private static final Logger log = LoggerFactory.getLogger(ProductsByProductIdView.class);
 
   @GetMapping("/products/by-product-id/{productId}")
+  // TODO until run locally query parsing problem is fixed, use the following query
   // @Query("""
   // SELECT * AS products
   // FROM products_by_product_id

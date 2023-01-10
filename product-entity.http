@@ -1,8 +1,8 @@
 @urlPrefix = http://localhost:9000
-@productId = product-3
-@name = Product 3
-@description = Product 3 description
-@price = 30.0
+@productId = product-1
+@name = Product 1
+@description = Product 1 description
+@price = 10.0
 
 ### Create a product
 

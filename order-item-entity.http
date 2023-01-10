@@ -1,0 +1,7 @@
+@urlPrefix = http://localhost:9000
+@productId = product-1
+
+### query the order item view
+
+GET {{urlPrefix}}/order-items/by-product-id/{{productId}}
+
