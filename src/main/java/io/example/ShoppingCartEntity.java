@@ -18,7 +18,7 @@ import kalix.springsdk.annotations.EventHandler;
 
 @EntityKey("cartId")
 @EntityType("shopping-cart")
-@RequestMapping("/shopping-cart")
+@RequestMapping("/shopping-cart/{cartId}")
 public class ShoppingCartEntity extends EventSourcedEntity<ShoppingCartEntity.State> {
   private static final Logger log = LoggerFactory.getLogger(ShoppingCartEntity.class);
   private final String entityId;
@@ -32,7 +32,7 @@ public class ShoppingCartEntity extends EventSourcedEntity<ShoppingCartEntity.St
     return State.empty();
   }
 
-  @PutMapping("/{cartId}/add-item")
+  @PutMapping("/add-item")
   public Effect<String> addItem(@RequestBody AddItemCommand command) {
     log.info("EntityId: {}\nState: {}\nCommand: {}", entityId, currentState(), command);
     if (currentState().checkedOut) {
@@ -44,7 +44,7 @@ public class ShoppingCartEntity extends EventSourcedEntity<ShoppingCartEntity.St
 
   }
 
-  @PutMapping("/{cartId}/checkout")
+  @PutMapping("/checkout")
   public Effect<String> checkout(@RequestBody CheckoutCommand command) {
     log.info("EntityId: {}\nState: {}\nCommand: {}", entityId, currentState(), command);
     return effects()
@@ -52,7 +52,7 @@ public class ShoppingCartEntity extends EventSourcedEntity<ShoppingCartEntity.St
         .thenReply(__ -> "OK");
   }
 
-  @GetMapping("/{cartId}")
+  @GetMapping
   public Effect<State> get() {
     log.info("EntityId: {}\nState: {}", entityId, currentState());
     return effects().reply(currentState());
@@ -88,8 +88,8 @@ public class ShoppingCartEntity extends EventSourcedEntity<ShoppingCartEntity.St
     }
 
     State on(ItemAddedEvent event) {
-      var newItems = new ArrayList<Item>(items);
-      newItems.add(event.item()); // TODO add duplicate check
+      var newItems = new ArrayList<Item>(items.stream().filter(i -> !i.productId().equals(event.item().productId())).toList());
+      newItems.add(event.item());
       return new State(event.cartId, checkedOut, newItems);
     }
 

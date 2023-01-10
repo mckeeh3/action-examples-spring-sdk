@@ -1,7 +1,7 @@
 @urlPrefix = http://localhost:9000
-@cartId = 123
-@productId = butter
-@quantity = 4
+@cartId = cart-1
+@productId = product-1
+@quantity = 1
 
 ### use action to add item to shopping cart
 

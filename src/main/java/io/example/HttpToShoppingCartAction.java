@@ -33,16 +33,16 @@ public class HttpToShoppingCartAction extends Action {
   }
 
   private CompletionStage<String> queryForProduct(String cartId, AddCartItemCommand commandIn) {
-    var path = "/products/by-product-id/%s".formatted(cartId);
+    var path = "/products/by-product-id/%s".formatted(commandIn.productId());
     var returnType = ProductsByProductIdView.Products.class;
 
     return kalixClient.get(path, returnType)
         .execute()
-        .thenCompose(queryResponse -> addProductToCart(cartId, commandIn, queryResponse));
+        .thenCompose(queryResponse -> addProductDetailsToCart(cartId, commandIn, queryResponse));
   }
 
-  private CompletionStage<String> addProductToCart(String cartId, AddCartItemCommand commandIn, Products queryResponse) {
-
+  private CompletionStage<String> addProductDetailsToCart(String cartId, AddCartItemCommand commandIn, Products queryResponse) {
+    log.info("Query response: {}", queryResponse);
     var path = "/shopping-cart/%s/add-item".formatted(cartId);
     var products = new ArrayList<ProductsByProductIdView.ProductViewRow>(queryResponse.products());
     if (products.size() == 0) {
@@ -77,6 +77,7 @@ public class HttpToShoppingCartAction extends Action {
     var returnType = ShoppingCartEntity.State.class;
     var result = kalixClient.get(path, returnType).execute();
 
+    // CompletionStage<Effect<Cart>> effect = result.handle((state, error) -> {
     var effect = result.handle((state, error) -> {
       if (error == null) {
         log.info("Cart: {}", state);
@@ -84,7 +85,7 @@ public class HttpToShoppingCartAction extends Action {
       } else {
         log.error("Error: {}", error);
         // return effects().error("Get cart failed: %s".formatted(error));
-        return effects().reply(Cart.stateToCart(state));
+        return effects().<Cart>error("Get cart failed: %s".formatted(error));
       }
     });
 
@@ -99,13 +100,13 @@ public class HttpToShoppingCartAction extends Action {
     }
   }
 
-  public record Item(String productId, int quantity) {
+  public record Item(String productId, String name, String description, int quantity) {
     static List<Item> itemsToItems(List<ShoppingCartEntity.Item> items) {
       return items.stream().map(item -> itemToItem(item)).toList();
     }
 
     static Item itemToItem(ShoppingCartEntity.Item item) {
-      return new Item(item.productId(), item.quantity());
+      return new Item(item.productId(), item.name(), item.description(), item.quantity());
     }
   }
 }

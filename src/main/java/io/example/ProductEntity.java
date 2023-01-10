@@ -54,12 +54,12 @@ public class ProductEntity extends EventSourcedEntity<ProductEntity.State> {
       return new State("", "", "", 0.0);
     }
 
-    public State on(ProductCreatedEvent event) {
-      return new State(event.productId, event.name, event.description, event.price);
-    }
-
     public ProductCreatedEvent eventFor(CreateProductCommand command) {
       return new ProductCreatedEvent(command.productId, command.name, command.description, command.price);
+    }
+
+    public State on(ProductCreatedEvent event) {
+      return new State(event.productId, event.name, event.description, event.price);
     }
   }
 

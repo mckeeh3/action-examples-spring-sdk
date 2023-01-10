@@ -1,0 +1,24 @@
+@urlPrefix = http://localhost:9000
+@orderId = cart-1
+
+### get order
+
+GET {{urlPrefix}}/order/{{orderId}}
+
+### approve order
+
+PUT {{urlPrefix}}/order/{{orderId}}/approve
+Content-Type: application/json
+
+{
+  "orderId": "{{orderId}}"
+}
+
+### reject order
+
+PUT {{urlPrefix}}/order/{{orderId}}/reject
+Content-Type: application/json
+
+{
+  "orderId": "{{orderId}}"
+}
