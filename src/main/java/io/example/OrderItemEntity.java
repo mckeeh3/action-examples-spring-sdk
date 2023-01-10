@@ -65,7 +65,7 @@ public class OrderItemEntity extends EventSourcedEntity<OrderItemEntity.State> {
 
   public record CreateOrderItemCommand(String productId, String orderId, String name, String description, int quantity) {
     String entityId() {
-      return "%s-%s".formatted(productId, orderId);
+      return "%s_%s".formatted(productId, orderId);
     }
   }
 

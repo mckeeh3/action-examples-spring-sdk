@@ -16,6 +16,42 @@ Content-Type: application/json
   "price": {{price}}
 }
 
+### Create product 1
+
+POST {{urlPrefix}}/product/product-1/create
+Content-Type: application/json
+
+{
+  "productId": "product-1",
+  "name": "Product 1",
+  "description": "Product description 1",
+  "price": {{price}}
+}
+
+### Create product 2
+
+POST {{urlPrefix}}/product/product-2/create
+Content-Type: application/json
+
+{
+  "productId": "product-2",
+  "name": "Product 2",
+  "description": "Product description 2",
+  "price": {{price}}
+}
+
+### Create product 3
+
+POST {{urlPrefix}}/product/product-3/create
+Content-Type: application/json
+
+{
+  "productId": "product-3",
+  "name": "Product 3",
+  "description": "Product description 3",
+  "price": {{price}}
+}
+
 ### Get a product
 
 GET {{urlPrefix}}/product/{{productId}}

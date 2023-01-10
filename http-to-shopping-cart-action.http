@@ -13,6 +13,45 @@ Content-Type: application/json
     "quantity": {{quantity}}
 }
 
+### add item 1 to shopping cart
+
+PUT {{urlPrefix}}/http-to-shopping-cart/{{cartId}}/add-item
+Content-Type: application/json
+
+{
+    "productId": "product-1",
+    "quantity": 11
+}
+
+### add item 2 to shopping cart
+
+PUT {{urlPrefix}}/http-to-shopping-cart/{{cartId}}/add-item
+Content-Type: application/json
+
+{
+    "productId": "product-2",
+    "quantity": 22
+}
+
+### add item 3 to shopping cart
+
+PUT {{urlPrefix}}/http-to-shopping-cart/{{cartId}}/add-item
+Content-Type: application/json
+
+{
+    "productId": "product-3",
+    "quantity": 33
+}
+
+### checkout shopping cart
+
+PUT {{urlPrefix}}/http-to-shopping-cart/{{cartId}}/checkout
+Content-Type: application/json
+
+{
+  "cartId": "{{cartId}}"
+}
+
 ### use action to get shopping cart
 
 GET {{urlPrefix}}/http-to-shopping-cart/{{cartId}}

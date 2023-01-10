@@ -1,7 +1,23 @@
 @urlPrefix = http://localhost:9000
 @productId = product-1
+@entityId = product-1_cart-1
 
 ### query the order item view
 
 GET {{urlPrefix}}/order-items/by-product-id/{{productId}}
 
+### query view for order item 1
+
+GET {{urlPrefix}}/order-items/by-product-id/product-1
+
+### query view for order item 2
+
+GET {{urlPrefix}}/order-items/by-product-id/product-2
+
+### query view for order item 3
+
+GET {{urlPrefix}}/order-items/by-product-id/product-3
+
+### get order item
+
+GET {{urlPrefix}}/order-item/{{entityId}}
