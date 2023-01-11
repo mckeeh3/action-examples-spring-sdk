@@ -30,15 +30,14 @@ public class HttpToShoppingCartAction extends Action {
     log.info("CartId: {}\ncommandIn: {}", cartId, commandIn);
 
     var effect = queryForProduct(cartId, commandIn)
-        .handle((response, failure) -> {
-          if (failure != null) {
-            return effects().<String>error(failure.getMessage());
+        .handle((response, error) -> {
+          if (error != null) {
+            return effects().<String>error(error.getMessage());
           } else {
             return effects().reply(response);
           }
         });
     return effects().asyncEffect(effect);
-    // return effects().asyncReply(queryForProduct(cartId, commandIn));
   }
 
   private CompletionStage<String> queryForProduct(String cartId, AddCartItemCommand commandIn) {
