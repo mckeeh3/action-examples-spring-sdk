@@ -9,8 +9,8 @@ PUT {{urlPrefix}}/http-to-shopping-cart/{{cartId}}/add-item
 Content-Type: application/json
 
 {
-    "productId": "{{productId}}",
-    "quantity": {{quantity}}
+  "productId": "{{productId}}",
+  "quantity": {{quantity}}
 }
 
 ### add item 1 to shopping cart
@@ -19,8 +19,8 @@ PUT {{urlPrefix}}/http-to-shopping-cart/{{cartId}}/add-item
 Content-Type: application/json
 
 {
-    "productId": "product-1",
-    "quantity": 11
+  "productId": "product-1",
+  "quantity": 11
 }
 
 ### add item 2 to shopping cart
@@ -29,8 +29,8 @@ PUT {{urlPrefix}}/http-to-shopping-cart/{{cartId}}/add-item
 Content-Type: application/json
 
 {
-    "productId": "product-2",
-    "quantity": 22
+  "productId": "product-2",
+  "quantity": 22
 }
 
 ### add item 3 to shopping cart
@@ -39,8 +39,8 @@ PUT {{urlPrefix}}/http-to-shopping-cart/{{cartId}}/add-item
 Content-Type: application/json
 
 {
-    "productId": "product-3",
-    "quantity": 33
+  "productId": "product-3",
+  "quantity": 33
 }
 
 ### checkout shopping cart
