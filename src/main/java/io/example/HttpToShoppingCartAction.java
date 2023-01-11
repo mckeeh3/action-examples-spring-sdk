@@ -29,11 +29,16 @@ public class HttpToShoppingCartAction extends Action {
   public Effect<String> addItem(@PathVariable String cartId, @RequestBody AddCartItemCommand commandIn) {
     log.info("CartId: {}\ncommandIn: {}", cartId, commandIn);
 
-    try {
-      return effects().asyncReply(queryForProduct(cartId, commandIn));
-    } catch (Exception e) {
-      return effects().error(e.getMessage());
-    }
+    var effect = queryForProduct(cartId, commandIn)
+        .handle((response, failure) -> {
+          if (failure != null) {
+            return effects().<String>error(failure.getMessage());
+          } else {
+            return effects().reply(response);
+          }
+        });
+    return effects().asyncEffect(effect);
+    // return effects().asyncReply(queryForProduct(cartId, commandIn));
   }
 
   private CompletionStage<String> queryForProduct(String cartId, AddCartItemCommand commandIn) {
